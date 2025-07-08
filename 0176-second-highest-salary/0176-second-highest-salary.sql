@@ -1,11 +1,5 @@
-WITH
-  RankedEmployees AS (
-    SELECT *, DENSE_RANK() OVER(ORDER BY salary DESC) AS `rank`
-    FROM Employee
-  )
-SELECT MAX(salary) AS SecondHighestSalary
-FROM RankedEmployees
-WHERE `rank` = 2;
-
-
-
+select
+(select distinct Salary 
+from Employee order by salary desc 
+limit 1 offset 1) 
+as SecondHighestSalary;
